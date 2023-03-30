@@ -18,9 +18,11 @@
     <title>ECOMMERCE APPLICATION</title>
 </head>
 <body>
-  <button class="btn btn-primary" onclick="signInWithGoogle()">
+  <button class="btn btn-primary" id="signInWithGoogle">
     <i class="fab fa-google"></i> Sign up with Google
   </button>
+  <h6 class="fw-lighter px-5 py-5" id="disp"></h6>
+  <h6 class="fw-lighter px-5 py-5" id="Display2"></h6>
             <!-- end /.footer-menu -->
           </div>
           <!-- Ends: .footer-widget -->
@@ -57,7 +59,7 @@
 <script type="module">
   // Import the functions you need from the SDKs you need
    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-   import { getAuth, onAuthStateChanged ,signOut, } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+   import { onAuthStateChanged,signOut,GoogleAuthProvider,getAuth,signInWithPopup,sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
    import { getDatabase,ref,set,onValue} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -75,17 +77,74 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+const database = getDatabase()
+let userIndex = 0
 // Define the signInWithGoogle() function
-const signInWithGoogle = () =>{ 
-  var provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-   console.log("sign in succesully")
-  }).catch(function(error) {
-    console.log("unable to sign in")
-  });
-}
+document.getElementById('signInWithGoogle').addEventListener("click",()=>{
+          signInWithPopup(auth,provider)
+          .then((response)=>{
+            console.log(response)
+            disp.innerHTML = `
+              <h1>WELCOME,${response.user.displayName}</h1>
+              <h6>${response.user.email}</h6>
+              <img src '${response.user.photoURL}'/>
+            `
+            let today = new Date();
+            let month = today.getMonth() + 1;
+            let year = today.getFullYear(); 
+            let date = today.getDate();
+            let UserDate = new Date()
+            let current_date = `${month}/${date}/${year}`;
+            let user = {
+              RecipentEmail: response.user.email,
+              RecipentName : response.user.displayName,
+              RecipentProfilePic : response.user.photoURL,
+              RecipentId : response.user.uid,
+              RecipentDate : current_date,
+              Recipenttime : UserDate.toLocaleTimeString(),
+            }
+            let userRef = ref(database,`allUsers/${userIndex}`)
+            set(userRef,user)
+              // window.location.href = "dashboard.html"
+              console.log(response)
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+  
+            let allUsersRef = ref(database,"allUsers")
+            onValue(allUsersRef,(snapshot)=>{
+              let data =snapshot.val()
+              console.log(data)
+              if(data){
+                userIndex = data.length
+              }else{
+                userIndex = 0
+              } 
+            })
+          });
+          // this code can be used to validdate user when he/she want to checkout for pay//
+          onAuthStateChanged(auth,(user)=>{
+              //console.log(user)
+              if(user){
+                  Display2.innerHTML = `<h1>Welcome, ${user.displayName}`
+                  disp.innerHTML = `<img src='${user.photoURL}' alt="UserDisplayName" height="100px" width="100px" style="border-radius:50%;">`
+              }else{
+                  //alert("user is not signed in")
+                  //window.location.href = "index.html"
+              }
+          })
+          signOutBtn.addEventListener("click",()=>{
+            signOut(auth)
+            .then(()=>{
+               console.log("User Signed out SuccessFully")
+                })
+            .catch((err)=>{
+            //console.log(err)
+      })
+})
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
