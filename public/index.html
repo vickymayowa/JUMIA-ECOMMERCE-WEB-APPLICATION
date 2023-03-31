@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://kit.fontawesome.com/1b728dc560.css" crossorigin="anonymous">
     <!-- lineicons cdn link  -->
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
      <!-- Boxiicons link  -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
       <!-- Style css  -->
@@ -357,7 +358,8 @@
           <h4 class="text-center mb-5"><strong>Product listing</strong></h4>
       
           <div class="row">
-            <div class="col-lg-4 col-md-12 mb-4">
+            <div class="col-lg-4 col-md-12 mb-4"
+            >
               <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
                 <img src="./pictures/Asset/download-removebg-preview.png"
                   class="w-100" />
@@ -558,8 +560,8 @@
                         </div>
                         <div class="subscribe-form">
                             <form action="#">
-                                <input type="text" placeholder="Email Address">
-                                <button><i class="fab fa-telegram-plane"></i></button>
+                                <input type="email" placeholder="Enter your Email Address" id="subscriber-email">
+                                <button id="subscribe-form" class="btn btn-danger"><i class="fab fa-telegram-plane"></i></button>
                             </form>
                         </div>
                     </div>
@@ -572,7 +574,7 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                     <div class="copyright-text">
-                        <p>Copyright &copy; 2023, All Right Reserved <a href="#">Soumitra Ghosh</a></p>
+                        <p>Copyright &copy; 2023, All Right Reserved <a href="#">VickyDev</a></p>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
@@ -601,6 +603,7 @@
             </p>
           </div>
 </footer>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="module">
   // Import the functions you need from the SDKs you need
    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
@@ -626,6 +629,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const database = getDatabase()
 let userIndex = 0
+let Index = 0
 // Define the signInWithGoogle() function
 
 document.getElementById('signInWithGoogle').addEventListener("click",()=>{
@@ -672,6 +676,37 @@ document.getElementById('signInWithGoogle').addEventListener("click",()=>{
               } 
             })
           });
+          document.getElementById("subscribe-form").addEventListener("click",()=>{
+            let today = new Date();
+            let month = today.getMonth() + 1;
+            let year = today.getFullYear(); 
+            let date = today.getDate();
+            let UserDate = new Date()
+            let current_date = `${month}/${date}/${year}`;
+            let Subscriber = {
+                UserEmail: subscriber-email.value,
+                UserDate : current_date,
+                UserTime : UserDate.toLocaleTimeString(),
+            }
+            let userRef = ref(database,`Subscribers Emails/${Index}`)
+            set(userRef,Subscriber)
+            console.log(response)
+            })
+            .catch((error) => {
+              console.log(error);
+              alert("hello world")
+            });
+            let SubscriberRef = ref(database,"Subscribers Emails")
+            onValue(allUsersRef,(snapshot)=>{
+            let data =snapshot.val()
+            Subscriber.innerHTML = `${data.length}`
+            if(data){
+                Index = data.length
+              }else{
+                Index = 0
+              } 
+            })
+          ;
           // this code can be used to validdate user when he/she want to checkout for pay//
           onAuthStateChanged(auth,(user)=>{
               //console.log(user)
