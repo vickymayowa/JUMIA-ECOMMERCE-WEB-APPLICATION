@@ -560,7 +560,7 @@
                         </div>
                         <div class="subscribe-form">
                             <form action="#">
-                                <input type="email" placeholder="Enter your Email Address" id="subscriber-email">
+                                <input type="email" placeholder="Enter your Email Address" id="hello">
                                 <button id="subscribe-form" class="btn btn-danger"><i class="fab fa-telegram-plane"></i></button>
                             </form>
                         </div>
@@ -676,6 +676,8 @@ document.getElementById('signInWithGoogle').addEventListener("click",()=>{
               } 
             })
           });
+
+
           document.getElementById("subscribe-form").addEventListener("click",()=>{
             let today = new Date();
             let month = today.getMonth() + 1;
@@ -683,22 +685,19 @@ document.getElementById('signInWithGoogle').addEventListener("click",()=>{
             let date = today.getDate();
             let UserDate = new Date()
             let current_date = `${month}/${date}/${year}`;
-            let Subscriber = {
-                UserEmail: subscriber-email.value,
+            // storing into the database
+            let Messages = {
+                UserEmail: hello.value,
                 UserDate : current_date,
                 UserTime : UserDate.toLocaleTimeString(),
             }
             let userRef = ref(database,`Subscribers Emails/${Index}`)
-            set(userRef,Subscriber)
-            console.log(response)
+            set(userRef,Messages)
             })
-            .catch((error) => {
-              console.log(error);
-              alert("hello world")
-            });
+
             let SubscriberRef = ref(database,"Subscribers Emails")
             onValue(allUsersRef,(snapshot)=>{
-            let data =snapshot.val()
+            let data = snapshot.val()
             Subscriber.innerHTML = `${data.length}`
             if(data){
                 Index = data.length
@@ -735,9 +734,16 @@ document.getElementById('signInWithGoogle').addEventListener("click",()=>{
       })
 })
 </script>
+<!-- <script>
+    const arr = [1, 2, 3];
+    arr[10] = 11;
+    console.log(arr);
+</script> -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-<script src="main.js"></script>
+<script src="main.js">
+
+</script>
 <script src="https://kit.fontawesome.com/1b728dc560.js" crossorigin="anonymous"></script>
 </body>
 </html>
