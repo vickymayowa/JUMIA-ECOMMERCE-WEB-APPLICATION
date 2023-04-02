@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JUMIA WEB APPLICATION</title>
     <link rel="stylesheet" href="Login.css">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+    rel="stylesheet"
+  />
     <link href="https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./bootstrap-5.2.2-dist/css/bootstrap.css">
 </head>
 <body>
+    <div class="container">DEMO TEXT</div>
+
+<!-- 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="#">
@@ -66,7 +73,18 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    <script>
+        let container = document.querySelector(".container");
+let timeNow = new Date().getHours();
+let greeting =
+  timeNow >= 12 && timeNow < 12
+    ? "Good Morning"
+    : timeNow >= 12 && timeNow < 18
+    ? "Good Afternoon"
+    : "Good evening";
+container.innerHTML = `<h1>${greeting}</h1>`;
+    </script>
     <script src="main.js"></script>
     <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
 </body>
