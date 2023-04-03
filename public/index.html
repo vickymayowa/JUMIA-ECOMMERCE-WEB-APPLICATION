@@ -592,7 +592,6 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-secondary" id="signOutBtn">signOut</button>
     <div class="copyright-area">
         <div class="container">
             <div class="row">
@@ -648,7 +647,7 @@ let Index = 0
 document.getElementById('signInWithGoogle').addEventListener("click",()=>{
           signInWithPopup(auth,provider)
           .then((response)=>{
-            console.log(response)
+            // console.log(response)
             // disp.innerHTML = `
             //   <div class="text-muted">${response.user.displayName}
             //    <img src= '${response.user.photoURL}' alt="Person" width="96" height="96" />
@@ -715,7 +714,7 @@ document.getElementById('signInWithGoogle').addEventListener("click",()=>{
             }
             let userRef = ref(database,`Subscribers Emails/${Index}`)
             set(userRef,Messages)
-            
+              hello.value = ""
             })
 
             let SubscriberRef = ref(database,"Subscribers Emails")
@@ -748,7 +747,7 @@ document.getElementById('signInWithGoogle').addEventListener("click",()=>{
           })
           document.getElementById("signOutBtn").addEventListener("click" ,()=>{
             Swal.fire({
-            title: `Dear ${user.name} ,Are you sure you want to sign out ?`,
+            title: `Dear ${response.user.name} ,Are you sure you want to sign out ?`,
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
