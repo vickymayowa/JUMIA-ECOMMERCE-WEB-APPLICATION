@@ -14,6 +14,10 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="login.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+  
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 <header class="header navbar-area">
@@ -197,6 +201,51 @@
             </div>
         </div>
     </div>
-   
+    <div class="container">
+        <div class="omb_login">
+          <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+        <div class="row omb_row-sm-offset-3 omb_socialButtons">
+              <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+                  <i class="fa fa-facebook visible-xs"></i>
+                  <span class="hidden-xs">Facebook</span>
+                </a>
+              </div>
+              <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+                  <i class="fa fa-twitter visible-xs"></i>
+                  <span class="hidden-xs">Twitter</span>
+                </a>
+              </div>	
+              <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-google">
+                  <i class="fa fa-google-plus visible-xs"></i>
+                  <span class="hidden-xs">Google+</span>
+                </a>
+              </div>	
+        </div>
+    
+        <div class="row omb_row-sm-offset-3 omb_loginOr text-center">
+          <div class="col-xs-12 col-sm-6">
+            <hr class="omb_hrOr">
+            <span class="omb_spanOr fw-bolder">or</span>
+          </div>
+        </div>   	
+        <div class="container-fluid fw-bold col-lg-6 col-sm-10">
+          <div class="mt-5 shadow mx-auto  my-5 p-3 rounded-2">
+              <div class="clas">
+                  <h5 class="text-dark fw-light fw-normal ms-2 mt-3">Email</h5>
+                  <input type="text" placeholder="Enter Your UserName" class="form-control mt-3" id="us">
+                  <div id="display"></div>
+              </div>
+              <div class="clas">
+                  <h5 class="text-dark fw-light fw-normal ms-2 mt-4">Password</h5>
+                  <input type="password" placeholder="Enter Your Password" class="form-control mt-3" id="pn">
+                  <div id="disp"></div>
+              </div>    
+        <div class="submit mt-3 p-3 text-center mb-5">
+           <button class="btn btn-success mx-auto fw-bolder" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; width: 220px; font-size: large;" onclick="letGod()" id="logBtn">Log In</button>
+        </div>
+</div>
 </body>
 </html>
