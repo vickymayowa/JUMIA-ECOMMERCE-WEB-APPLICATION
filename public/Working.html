@@ -1,0 +1,31 @@
+<div class="container mt-3 mb-4">
+    <div class="row">
+      <div class="col-sm-6">
+        <img src="./pictures/Asset/e-commerce.gif" alt="Gif Ecommerce" class="img-fluid">
+      </div>
+      <div class="col-sm-6">
+        <img src="./pictures/Asset/Shopping.gif" alt="Gif Ecommerce" class="img-fluid">
+      </div>
+    </div>
+  </div>
+  <button type="button" class="login-with-google-btn fw-bolder Google" id="signInWithGoogle">
+    Sign in with Google
+  </button>
+  <link
+  href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+  rel="stylesheet"
+/>
+<link href="https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./bootstrap-5.2.2-dist/css/bootstrap.css">
+<script>
+let container = document.querySelector(".container");
+let timeNow = new Date().getHours();
+let greeting =
+  timeNow >= 12 && timeNow < 12
+    ? "Good Morning"
+    : timeNow >= 12 && timeNow < 18
+    ? "Good Afternoon"
+    : "Good evening";
+container.innerHTML = `<h1>${greeting}</h1>`;
+    </script>
+</script>
